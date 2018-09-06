@@ -25,6 +25,7 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace UnitySerial
@@ -32,7 +33,7 @@ namespace UnitySerial
     /// <summary>
     /// Serial port data
     /// </summary>
-    public struct PortInfo
+    public struct PortInfo : IEquatable<PortInfo>
     {
         /// <summary>
         /// Address of the serial port
@@ -66,6 +67,38 @@ namespace UnitySerial
                 return "PortInfo <Invalid>";
 
             return "PortInfo '" + port + "' '" + description + "' '" + hardwareID + "'";
+        }
+
+        public bool Equals(PortInfo other)
+        {
+            return string.Equals(port, other.port) && string.Equals(description, other.description) && string.Equals(hardwareID, other.hardwareID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is PortInfo && Equals((PortInfo) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (port != null ? port.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (hardwareID != null ? hardwareID.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(PortInfo left, PortInfo right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(PortInfo left, PortInfo right)
+        {
+            return !left.Equals(right);
         }
     }
 }
