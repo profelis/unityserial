@@ -1,6 +1,6 @@
 # Serial Communication plugin for Unity3D
 
-Plugin extends C# API `SerialPort.GetPortNames()`. 
+Plugin extends C# API `SerialPort.GetPortNames()`
 
 ## Main features
 
@@ -14,6 +14,7 @@ Plugin extends C# API `SerialPort.GetPortNames()`.
 - Sample: Tested in Unity 2018.2.5
 
 ## Usage
+
 ```c#
 var ports = new SerialPorts();
 // get ports count
@@ -27,10 +28,11 @@ if (arduino.IsValid) {
 } else {
     Debug.Log("arduino not found");
 }
+```
 
-```
 ## Output example
-```
+
+```text
 Ports count: 3
 Port #0: PortInfo '/dev/cu.serial0' 'n/a' 'n/a'
 Port #1: PortInfo '/dev/cu.Bluetooth-Incoming-Port' 'n/a' 'n/a'
